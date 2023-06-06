@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en",background="school.jpg">
+<head>
+   <meta charset="UTF-8">
+   <title>登录页面</title>
+   <style>
+       body{
+       text-align:center;
+      }
+   </style>
+</head>
+<body background="C:/Users/10068/myNLP/Django/first_try/sentiment/static/school.jpg"  >
+<form action="/login/" method="post">
+  {% csrf_token %}
+   <h1 align="center" style="color:green">细粒度情感系统企业用户登录页面</h1>
+   <p class="divs">
+       <label for="username">用户名:</label>
+       <input type="text" id="username" name="username" align="center">
+   </p>
+   <p class="divs">
+       &nbsp&nbsp&nbsp<label for="password">密码:</label>
+       <input type="password" id="password" name="password">
+   </p>
+   <input type="submit" value="登录">
+   <span style="color:red">{{ error }}</span>
+</form>
+
+
+</body>
+</html>

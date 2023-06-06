@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="zh-CN" style="height: 100%">
+<head>
+  <meta charset="utf-8">
+</head>
+<body style="height: 100%; margin: 0">
+  <div id="container" style="height: 100%"></div>
+
+  
+  <script type="text/javascript" src="https://fastly.jsdelivr.net/npm/echarts@5.4.2/dist/echarts.min.js"></script>
+  <!-- Uncomment this line if you want to dataTool extension
+  <script type="text/javascript" src="https://fastly.jsdelivr.net/npm/echarts@5.4.2/dist/extension/dataTool.min.js"></script>
+  -->
+  <!-- Uncomment this line if you want to use gl extension
+  <script type="text/javascript" src="https://fastly.jsdelivr.net/npm/echarts-gl@2/dist/echarts-gl.min.js"></script>
+  -->
+  <!-- Uncomment this line if you want to echarts-stat extension
+  <script type="text/javascript" src="https://fastly.jsdelivr.net/npm/echarts-stat@latest/dist/ecStat.min.js"></script>
+  -->
+  <!-- Uncomment this line if you want to use map
+  <script type="text/javascript" src="https://fastly.jsdelivr.net/npm/echarts@4.9.0/map/js/china.js"></script>
+  <script type="text/javascript" src="https://fastly.jsdelivr.net/npm/echarts@4.9.0/map/js/world.js"></script>
+  -->
+  <!-- Uncomment these two lines if you want to use bmap extension
+  <script type="text/javascript" src="https://api.map.baidu.com/api?v=3.0&ak=YOUR_API_KEY"></script>
+  <script type="text/javascript" src="https://fastly.jsdelivr.net/npm/echarts@5.4.2/dist/extension/bmap.min.js"></script>
+  -->
+
+  <script type="text/javascript">
+    var dom = document.getElementById('container');
+    var myChart = echarts.init(dom, null, {
+      renderer: 'canvas',
+      useDirtyRect: false
+    });
+    var app = {};
+    
+    var option;
+
+    option = {
+  title: {
+    text: '细粒度情感分析：各属性的情感对比',
+    subtext:"开发者：姚远",
+    left: 'center',
+    link:"http://echarts.baidu.com/",//点击标题内容要跳转的链接
+    target:"blank",//跳转链接打开方式，blank是新窗口打开，self是自身窗口打开，跟a标签一样
+    textStyle:{//标题内容的样式
+        color:'#e4393c',//京东红
+        fontStyle:'normal',//lic主标题文字字体风格，默认normal，有italic(斜体),oblique(斜体)
+        fontWeight:"bold",//可选normal(正常)，bold(加粗)，bolder(加粗)，lighter(变细)，100|200|300|400|500...
+        fontFamily:"san-serif",//主题文字字体，默认微软雅黑
+        fontSize:38//主题文字字体大小，默认为18px
+    },
+    textAlign:'left',//标题文本水平对齐方式，建议不要设置，就让他默认，想居中显示的话，建议往下看
+    textBaseline:"top"//默认就好,垂直对齐方式,不要设置
+  },
+
+  tooltip: {
+    trigger: 'axis',
+    axisPointer: {
+      // Use axis to trigger tooltip
+      type: 'shadow' // 'shadow' as default; can also be 'line' or 'shadow'
+    }
+  },
+  legend: {},
+  grid: {
+    left: '3%',
+    right: '4%',
+    bottom: '3%',
+    containLabel: false
+  },
+   legend: { // 图例
+      show: true,
+       bottom: 16,
+  },
+  xAxis: {
+    type: 'value',
+    axisLabel: {
+         interval: 0
+    }
+  },
+  yAxis: {
+    type: 'category',
+    data: ['Rating', 'Amenity', 'Location', 'Restaurant_Name', 'Price', 'Hours', 'Dish', 'Cuisine']
+  },
+  series: [
+    {
+      name: '正面情感',
+      type: 'bar',
+      stack: 'total',
+      label: {
+        show: true,
+        fontSize: 30,
+        position: 'insideBottom'
+      },
+      legendHoverLink:false,
+      emphasis: {
+        focus: 'series'
+      },
+      barWidth: 30,
+      data: [320, 302, 301, 334, 390, 330, 320, 320]
+    },
+    {
+      name: '负面情感',
+      type: 'bar',
+      stack: 'total',
+      label: {
+        show: true,
+        fontSize: 30,
+        position: 'insideBottom'
+      },
+      legendHoverLink:false,
+      emphasis: {
+        focus: 'series'
+      },
+      data: [120, 132, 101, 134, 90, 230, 210, 210]
+    }
+   ]
+};
+
+    if (option && typeof option === 'object') {
+      myChart.setOption(option);
+    }
+
+    window.addEventListener('resize', myChart.resize);
+  </script>
+</body>
+</html>
